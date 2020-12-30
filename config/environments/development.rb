@@ -35,10 +35,13 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+
+  # 開發時不寄信，只打在 console 上
+  config.action_mailer.delivery_method = :letter_opener
 
   # 加上 email 寄發的路徑
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 8080 }
 
   config.action_mailer.perform_caching = false
 

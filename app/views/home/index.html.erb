@@ -2,6 +2,10 @@
 
 <% if @user %>
   現在使用者：<%= @user.name %>
+<% else %>
+  無登入狀態
 <% end %>
 
 <%= link_to '登入', new_user_session_path %>
+<%= link_to '註冊', new_user_registration_path %>
+<%= link_to '登出', destroy_user_session_path, method: 'DELETE' %>
