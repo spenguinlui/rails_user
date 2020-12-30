@@ -1,0 +1,7 @@
+我是首頁
+
+<% if @user %>
+  現在使用者：<%= @user.name %>
+<% end %>
+
+<%= link_to '登入', new_user_session_path %>
