@@ -1,11 +1,39 @@
-我是首頁
-
-<% if @user %>
-  現在使用者：<%= @user.name %>
-<% else %>
-  無登入狀態
-<% end %>
-
-<%= link_to '登入', new_user_session_path %>
-<%= link_to '註冊', new_user_registration_path %>
-<%= link_to '登出', destroy_user_session_path, method: 'DELETE' %>
+<main class="text-center d-flex justify-content-center align-items-center w-100" style="margin-top: 200px">
+  <div class="bg-light border border-secondary rounded-lg p-5">
+    <h3 class="mb-3">Rails Devise 結合第三方登入</h3>
+    <h4>目前登入：
+      <small class="text-danger">
+        <%= user_signed_in? ? @user.name : '無' %>
+      </small>
+    </h4>
+    <div class="my-4">
+      <% if user_signed_in? %>
+        <%= button_to '登出', destroy_user_session_path, :method => :delete, class: "btn btn-outline-dark" %>
+      <% else %>
+        <%= button_to '進入登入頁面', new_user_session_path, class: "btn btn-outline-dark" %>
+      <% end %>
+    </div>
+    <hr />
+    <div>
+      <h5 class="text-left">已建立使用者清單</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">類型</th>
+              <th scope="col">姓名</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <th scope="row"><%= user.account_type %></th>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+<main>

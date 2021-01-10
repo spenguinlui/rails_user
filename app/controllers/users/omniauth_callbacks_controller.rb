@@ -11,10 +11,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     @user = User.find_for_google_oauth2(request.env["omniauth.auth"], current_user)
 
+    Rails.logger.debug "------------- 取得 User -------------"
+
+    # 判斷是否已存在資料庫
     if @user.persisted?
+      Rails.logger.debug "------------- User 已存在 -------------"
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
       sign_in_and_redirect @user, :event => :authentication
     else
+      Rails.logger.debug "------------- User 不存在 -------------"
       session["devise.google_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url
     end
@@ -23,10 +28,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
+    Rails.logger.debug "------------- 取得 User -------------"
+
     if @user.persisted?
+      Rails.logger.debug "------------- User 已存在 -------------"
       sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
       set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
     else
+      Rails.logger.debug "------------- User 不存在 -------------"
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url
     end

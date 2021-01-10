@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root "home#index"
   
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-  namespace :users do
+  namespace :user do
     # user 登入後會轉址到 user_home_path
     root to: 'home#index' # 路徑會是 /user/home#index
   end

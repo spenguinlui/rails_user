@@ -57,4 +57,14 @@ class User < ApplicationRecord
     user.save!
     return user
   end
+
+  def account_type
+    if self.fb_uid.present?
+      return 'facebook'
+    end
+    if self.google_uid.present?
+      return 'google'
+    end
+    'common'
+  end
 end

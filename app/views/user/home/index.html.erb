@@ -1,0 +1,17 @@
+<main class="text-center d-flex justify-content-center align-items-center w-100" style="margin-top: 200px">
+  <div class="bg-light border border-secondary rounded-lg p-5">
+    <h3>使用者頁面</h3>
+    <div class="my-3">
+      <ul class="list-group text-left">
+        <li class="list-group-item">類型:<span class="text-muted ml-3"><%= @user.account_type %></span></li>
+        <li class="list-group-item">ID:<span class="text-muted ml-3"><%= @user.id %></span></li>
+        <li class="list-group-item">登入名:<span class="text-muted ml-3"><%= @user.name %></span></li>
+        <li class="list-group-item">Email:<span class="text-muted ml-3"><%= @user.email %></span></li>
+      </ul>
+    </div>
+    <div class="d-flex justify-content-center" role="group">
+      <%= button_to '登出', destroy_user_session_path, :method => :delete, class: "btn btn-outline-dark mr-3" %>
+      <%= link_to '回首頁', root_path, class: "btn btn-outline-dark" %>
+    </div>
+  </div>
+</main>

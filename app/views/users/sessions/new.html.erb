@@ -1,26 +1,35 @@
-<h2>Log in</h2>
+<main class="text-center d-flex justify-content-center align-items-center w-100" style="margin-top: 200px">
+  <div class="bg-light border border-secondary rounded-lg p-5">
+    <h2>登入頁面</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field text-left my-1">
+        <%= f.label 'Email' %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="field text-left my-1">
+        <%= f.label '密碼' %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field my-2">
+          <%= f.check_box :remember_me %>
+          <%= f.label '記住帳號' %>
+        </div>
+      <% end %>
+
+      <div class="btn-toolbar" role="group">
+        <button type="submit" class="btn btn-outline-dark mr-2">登入</button>
+        <%= link_to "註冊", new_registration_path(resource_name), class: "btn btn-outline-dark mr-2" %>
+        <%= link_to "忘記密碼", new_password_path(resource_name), class: "btn btn-outline-dark" %>
+      </div>
+      <div class="d-flex justify-content-center my-3" role="group">
+        <div style="height: 50px"><%= link_to image_tag('facebook-icon.svg', class: "h-100"), omniauth_authorize_path(resource_name, :facebook) %></div>
+        <div style="height: 50px"><%= link_to image_tag('google-icon.png', class: "h-100 p-1"), omniauth_authorize_path(resource_name, :google_oauth2) %></div>
+      </div>
+    <% end %>
   </div>
+<main>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
