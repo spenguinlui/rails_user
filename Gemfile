@@ -41,6 +41,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-line'
 
 # developmant 不寄信
 gem 'letter_opener'

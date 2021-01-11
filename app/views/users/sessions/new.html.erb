@@ -27,6 +27,7 @@
       <div class="d-flex justify-content-center my-3" role="group">
         <div style="height: 50px"><%= link_to image_tag('facebook-icon.svg', class: "h-100"), omniauth_authorize_path(resource_name, :facebook) %></div>
         <div style="height: 50px"><%= link_to image_tag('google-icon.png', class: "h-100 p-1"), omniauth_authorize_path(resource_name, :google_oauth2) %></div>
+        <div style="height: 50px"><%= link_to image_tag('line-icon.png', class: "h-100 p-1"), omniauth_authorize_path(resource_name, :line) %></div>
       </div>
     <% end %>
   </div>

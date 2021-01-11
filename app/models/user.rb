@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
         #  :confirmable,
          :lockable, :timeoutable, :trackable,
-         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :line]
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -31,7 +31,7 @@ class User < ApplicationRecord
     end
   end
 
-  def self.from_omniauth(auth)
+  def self.find_for_fb_omniauth(auth)
     # Case 1: Find existing user by facebook uid
     user = User.find_by_fb_uid( auth.uid )
     if user
@@ -56,6 +56,27 @@ class User < ApplicationRecord
     user.name = auth.info.name
     user.save!
     return user
+  end
+
+  def self.find_for_line_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.password = Devise.friendly_token[0,20]
+      case auth.provider
+      when "line"
+        user.name = auth.info.name
+        user.line_image_url = auth.info.image
+        user.line_description = auth.info.description
+      end
+    end
+  end
+
+  # devise 的方法, line 沒有 email, 所以要加入
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
   end
 
   def account_type
