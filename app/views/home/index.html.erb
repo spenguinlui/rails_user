@@ -31,7 +31,7 @@
                 <th scope="row"><%= user.account_type %></th>
                 <td><%= user.name %></td>
                 <td><%= user.email %></td>
-                <td><%= button_to "刪除", "user/#{user.id}", method: :delete, remote: true %></td>
+                <td><%= button_to "刪除", "user/#{user.id}", method: :delete, remote: true, class: "btn btn-sm btn-outline-dark" %></td>
               </tr>
             <% end %>
           </tbody>

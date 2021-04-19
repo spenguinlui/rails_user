@@ -37,7 +37,8 @@ gem 'dotenv-rails'
 gem 'awesome_print', '~> 1.8'
 
 # for User/Admin
-gem 'devise'
+# gem 'devise' # 等待 merge 後才能用
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
