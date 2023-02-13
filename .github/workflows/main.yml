@@ -1,0 +1,13 @@
+name: Workflow Test
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/1 * * * *"
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Slack
+        run: echo "test test"
